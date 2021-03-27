@@ -39,7 +39,7 @@ void ASSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 void ASSCharacter::MoveForward(float AxisValue)
 {
-	AddMovementInput(GetActorForwardVector() * AxisValue);
+	AddMovementInput(GetActorForwardVector() * AxisValue); 
 }
 
 void ASSCharacter::MoveRight(float AxisValue)
