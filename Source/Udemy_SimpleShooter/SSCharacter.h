@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "SSCharacter.generated.h"
 
+class ASSGun;
+
 UCLASS()
 class UDEMY_SIMPLESHOOTER_API ASSCharacter : public ACharacter
 {
@@ -34,4 +36,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 10.0f;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ASSGun> GunBlueprintClass;
+
+	UPROPERTY()
+	ASSGun* Gun;
 };

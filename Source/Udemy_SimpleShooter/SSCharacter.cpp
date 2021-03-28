@@ -2,6 +2,7 @@
 
 
 #include "SSCharacter.h"
+#include "SSGun.h"
 
 // Sets default values
 ASSCharacter::ASSCharacter()
@@ -15,7 +16,11 @@ ASSCharacter::ASSCharacter()
 void ASSCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	Gun = GetWorld()->SpawnActor<ASSGun>(GunBlueprintClass);
+	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
+	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+	Gun->SetOwner(this);
 }
 
 // Called every frame
