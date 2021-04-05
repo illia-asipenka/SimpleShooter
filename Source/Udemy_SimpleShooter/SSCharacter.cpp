@@ -40,6 +40,12 @@ void ASSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &ASSCharacter::MoveRight);
 	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &ASSCharacter::LookRight);
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction(TEXT("PullTrigger"), IE_Pressed, this, &ASSCharacter::Shoot);
+}
+
+void ASSCharacter::Shoot()
+{
+	Gun->PullTrigger();
 }
 
 void ASSCharacter::MoveForward(float AxisValue)
