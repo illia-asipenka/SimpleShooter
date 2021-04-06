@@ -49,8 +49,18 @@ void ASSGun::PullTrigger()
 	FRotator ViewRotation;
 	OwnerController->GetPlayerViewPoint(ViewLocation, ViewRotation);
 
-	DrawDebugCamera(GetWorld(), ViewLocation, ViewRotation, 90, 2, FColor::Red, true);
+	FVector End = ViewLocation + ViewRotation.Vector() * MaxRange;
+	FHitResult Hit;
 	
-	UE_LOG(LogTemp, Warning, TEXT("Shoot!"));
+	bool bHitSuccess = GetWorld()->LineTraceSingleByChannel(Hit, ViewLocation, End, ECollisionChannel::ECC_GameTraceChannel1);
+
+	if(bHitSuccess)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Shoot!"));
+		DrawDebugLine(GetWorld(), ViewLocation, Hit.Location, FColor::Blue, true, 5, 0, 2);
+		//DrawDebugPoint(GetWorld(), Hit.Location, 20, FColor::Blue, true);
+	}
+	//DrawDebugCamera(GetWorld(), ViewLocation, ViewRotation, 90, 2, FColor::Red, true);
+	//DrawDebugPoint(GetWorld(), ViewLocation, 20, FColor::Blue, true);	
 }
 
